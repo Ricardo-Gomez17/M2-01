@@ -1,0 +1,71 @@
+import UIKit
+
+var numero1: Float = 0
+var numero2: Float = 0
+
+func suma(numero1 :Float , numero2 :Float){
+    
+    numero1 + numero2
+}
+
+func resta(numero1 :Float , numero2 :Float){
+    
+    numero1 - numero2
+}
+
+func multiplicacion(numero1 :Float , numero2 :Float){
+    
+    numero1 * numero2
+}
+
+func division(numero1 :Float , numero2 :Float){
+    
+    numero1 / numero2
+}
+
+print("""
+    Seleccione una opcion:
+1. Suma
+2. Resta
+3. Multiplicacion
+4. Division
+""")
+
+var opcion = readLine()
+var numOpcion = Float(opcion ?? "0")
+
+if numOpcion == 1 {
+    var string1 = readLine()
+    var numero1 = Float(string1 ?? "0")
+    var string2 = readLine()
+    var numero2 = Float(string2 ?? "0")
+    
+    suma(numero1: <#T##Float#>, numero2: <#T##Float#>)
+}
+
+if numOpcion == 2 {
+    var string1 = readLine()
+    var numero1 = Float(string1 ?? "0")
+    var string2 = readLine()
+    var numero2 = Float(string2 ?? "0")
+    
+    resta(numero1: <#T##Float#>, numero2: <#T##Float#>)
+}
+
+if numOpcion == 3 {
+    var string1 = readLine()
+    var numero1 = Float(string1 ?? "0")
+    var string2 = readLine()
+    var numero2 = Float(string2 ?? "0")
+    
+    multiplicacion(numero1: <#T##Float#>, numero2: <#T##Float#>)
+}
+
+if numOpcion == 4 {
+    var string1 = readLine()
+    var numero1 = Float(string1 ?? "0")
+    var string2 = readLine()
+    var numero2 = Float(string2 ?? "0")
+    
+    division(numero1: <#T##Float#>, numero2: <#T##Float#>)
+}
