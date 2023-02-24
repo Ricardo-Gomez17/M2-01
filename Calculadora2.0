@@ -1,0 +1,33 @@
+import Foundation
+
+print("Introduzca una operación: ")
+let operacion = readLine()!
+
+var numeros = [Int]()
+var caracteres = [String]()
+
+let operacionesAceptadas = ["+", "-", "*", "/"]
+
+var temporal = ""
+for caracter in operacion {
+    if operacionesAceptadas.contains(temporal) {
+        caracteres.append(String(caracter))
+        numeros.append(Int(temporal)!)
+        temporal = ""
+    } else {
+        temporal += String(caracter)
+    }
+}
+
+print(numeros)
+print(caracteres)
+
+var resultado = 0
+for (index,numero) in numeros.enumerated() {
+  switch operacione[index] {
+    
+    case "+":
+      resultado += nuemro +
+    }
+
+}
