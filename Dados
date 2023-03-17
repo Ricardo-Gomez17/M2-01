@@ -1,0 +1,45 @@
+import Foundation
+
+// Pedimos el número de casos
+print("Ingrese el número de casos:")
+guard let numCasosString = readLine(), let numCasos = Int(numCasosString) else {
+    fatalError("No se pudo leer el número de casos")
+}
+
+// Realizamos un bucle para cada caso
+for i in 1...numCasos {
+    // Pedimos el número de dados
+    print("Caso \(i): Ingrese el número de dados:")
+    guard let numDadosString = readLine(), let numDados = Int(numDadosString) else {
+        fatalError("No se pudo leer el número de dados para el caso \(i)")
+    }
+    
+    // Pedimos las caras de los dados
+    print("Caso \(i): Ingrese las caras de los dados separadas por espacios:")
+    guard let carasString = readLine() else {
+        fatalError("No se pudo leer las caras de los dados para el caso \(i)")
+    }
+    
+    // Convertimos las caras a un arreglo de enteros
+    let carasParts = carasString.split(separator: " ")
+    var caras: [Int] = []
+    for caraPart in carasParts {
+        if let cara = Int(caraPart) {
+            caras.append(cara)
+        }
+    }
+    
+    // Verificamos que se ingresaron suficientes caras
+    guard caras.count == numDados else {
+        fatalError("El número de caras ingresadas no coincide con el número de dados para el caso \(i)")
+    }
+    
+    // Calculamos el número de casos posibles
+    var numCasosPosibles = 1
+    for cara in caras {
+        numCasosPosibles += cara
+    }
+    
+    // Mostramos el resultado
+    print("El número de casos posibles para el caso \(i) es: \(numCasosPosibles)\n")
+}
