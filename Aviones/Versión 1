@@ -1,0 +1,138 @@
+import Foundation
+
+// Definir el tamaño de la matriz
+let tamanoMatriz = 5
+
+// Crear la matriz con todos los elementos iguales a cero
+var matriz = [[Int]](repeating: [Int](repeating: 0, count: tamanoMatriz), count: tamanoMatriz)
+
+// Insertar aviones manualmente
+for i in 1...3 {
+    print("Ingrese las coordenadas para el avión \(i):")
+    print("Fila:")
+    let fila = Int(readLine()!)!
+    print("Columna:")
+    let columna = Int(readLine()!)!
+    matriz[fila][columna] = 1
+}
+
+// Función para sumar los aviones en la matriz y mostrar las coordenadas de los choques
+func sumarAviones() {
+    var sumaAviones = 0
+    var choques = [(Int, Int)]()
+    for i in 0..<tamanoMatriz {
+        for j in 0..<tamanoMatriz {
+            if matriz[i][j] == 1 {
+                sumaAviones += 1
+            }
+            if matriz[i][j] == 2 {
+                choques.append((i, j))
+            }
+        }
+    }
+    if choques.count > 0 {
+        print("Se encontraron \(choques.count) choques en las siguientes coordenadas:")
+        for choque in choques {
+            print("\(choque)")
+        }
+    }
+    else {
+        print("No se encontraron choques")
+    }
+    print("Hay un total de \(sumaAviones) aviones en la matriz")
+}
+
+// Mostrar la matriz en pantalla
+for fila in matriz {
+    for elemento in fila {
+        print("\(elemento)", terminator: " ")
+    }
+    print("")
+}
+
+// Mover los aviones según las instrucciones recibidas
+while true {
+    print("Ingrese las instrucciones para mover los aviones:")
+    guard let instrucciones = readLine() else {
+        break
+    }
+    
+    let movimientos = instrucciones.components(separatedBy: " ")
+    
+    for movimiento in movimientos {
+        let coordenadas = movimiento.prefix(2)
+        let direccion = movimiento.suffix(1)
+        
+        guard let fila = Int(String(coordenadas.prefix(1))),
+              let columna = Int(String(coordenadas.suffix(1))) else {
+            print("Coordenadas no válidas")
+            continue
+        }
+        
+        if matriz[fila][columna] == 0 {
+            matriz[fila][columna] = 1
+        } else {
+            matriz[fila][columna] = 2
+        }
+        
+        switch direccion {
+        case "<":
+            if columna > 0 {
+                if matriz[fila][columna-1] == 0 {
+                    matriz[fila][columna-1] = 1
+                } else {
+                    matriz[fila][columna-1] = 2
+                }
+                matriz[fila][columna] = 0
+            } else {
+                matriz[fila][columna] = 2
+            }
+        case ">":
+            if columna < tamanoMatriz-1 {
+                if matriz[fila][columna+1] == 0 {
+                    matriz[fila][columna+1] = 1
+                } else {
+                    matriz[fila][columna+1] = 2
+                }
+                matriz[fila][columna] = 0
+            } else {
+                matriz[fila][columna] = 2
+            }
+        case "^":
+            if fila > 0 {
+                if matriz[fila-1][columna] == 0 {
+                    matriz[fila-1][columna] = 1
+                } else {
+                    matriz[fila-1][columna] = 2
+                }
+                matriz[fila][columna] = 0
+            } else {
+                matriz[fila][columna] = 2
+            }
+        case "v":
+            if fila < tamanoMatriz-1 {
+                if matriz[fila+1][columna] == 0 {
+                    matriz[fila+1][columna] = 1
+                } else {
+                    matriz[fila+1][columna] = 2
+                }
+                matriz[fila][columna] = 0
+            } else {
+                matriz[fila][columna] = 2
+            }
+        default:
+            print("Dirección no válida")
+        }
+        
+        // Mostrar la matriz en pantalla después de cada movimiento
+        for fila in matriz {
+            for elemento in fila {
+                print("\(elemento)", terminator: " ")
+            }
+            print("")
+        }
+        
+        // Sumar los aviones y mostrar los choques si los hay
+        sumarAviones()
+    }
+}
